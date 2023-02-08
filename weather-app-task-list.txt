@@ -1,0 +1,14 @@
+Search for specific location to retrieve weather information
+Toggle between Fahrenheith/ Celsius
+Change look of page based on weather data
+Images to describe weather
+Use promises or async/await
+
+
+Create github repo
+Set up blank HTML, JS, and CSS files
+Create functions that hit API
+  - Function to take location and return weather data
+  - Functions to process JSON data from API and return an object with required data (review API docs)
+Create form for users to input location and fetch data for that location
+(Optional) Add a 'loading' component that displays while API is 'fetching' data. 
