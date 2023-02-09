@@ -5,8 +5,8 @@ Images to describe weather
 Use promises or async/await
 
 
-Create github repo
-Set up blank HTML, JS, and CSS files
+(Done) Create github repo
+(Done) Set up blank HTML, JS, and CSS files
 Create functions that hit API
   - Function to take location and return weather data
   - Functions to process JSON data from API and return an object with required data (review API docs)
