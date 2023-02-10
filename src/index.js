@@ -1,5 +1,5 @@
-import { getData } from './logic';
+import { getWeatherData } from './logic';
 
-getData('Richmond');
+getWeatherData();
 
 console.log();
