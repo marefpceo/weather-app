@@ -17,12 +17,18 @@ async function getGeoData(location) {
 // Gets current weather and 5 day forecast for selected location
 export async function getWeatherData() {
   try {
-    const cityData = await getGeoData('Lemoore');
-    let lat, long;
+    const cityData = await getGeoData('Richmond');
+    let lat, long, cityList;
     if (cityData.length > 1) {
       for (let i = 0; i < cityData.length; i += 1) {
-        console.log(cityData[i].state);
+        cityList = cityData[i].state;
+        console.log(cityList);
       }
+      let selection = prompt('Select state');
+      let index = cityData.findIndex(city => city.state === selection);
+      lat = cityData[index].lat;
+      long = cityData[index].lon;
+      console.log(index);
     } else {
       lat = cityData[0].lat;
       long = cityData[0].lon;
