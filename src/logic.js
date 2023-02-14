@@ -24,7 +24,7 @@ export async function getWeatherData(searchInput) {
         cityList = cityData[i].state;
         console.log(cityList);
       }
-      let selection = prompt('Select state');
+      let selection = 'Virginia'; // For testin purposes only. User will select state from list
       let index = cityData.findIndex(city => city.state === selection);
       lat = cityData[index].lat;
       long = cityData[index].lon;
@@ -43,7 +43,8 @@ export async function getWeatherData(searchInput) {
       city: searchInput,
       state: state,
       currentTemps: currentWeather.main,
-      currentConditions: currentWeather.weather[0].description,
+      currentConditions: {description: currentWeather.weather[0].description,
+        icon: currentWeather.weather[0].icon},
       wind: currentWeather.wind,
       sunrise: currentWeather.sys.sunrise,
       sunset: currentWeather.sys.sunset
