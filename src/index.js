@@ -1,5 +1,7 @@
 import { getWeatherData } from './logic';
 
-getWeatherData();
+const city = prompt('Enter a city');
+
+getWeatherData(city);
 
 console.log();
