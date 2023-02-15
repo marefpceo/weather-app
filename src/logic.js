@@ -1,5 +1,4 @@
 const apiKey = '8f640f8fcc7f3fdc5f949c5b28f1bf02';
-
 // Uses OpenWeather geocoding API to return lat/ long coordinates for searched location
 async function getGeoData(location) {
   const searchLocation = location;
@@ -52,6 +51,7 @@ export async function getWeatherData(searchInput) {
 
     console.log(cityData, currentWeather);
     console.log(outputData);
+
   } catch (error) {
     Error(error);
   }
