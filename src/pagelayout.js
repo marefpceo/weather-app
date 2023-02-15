@@ -1,5 +1,5 @@
 const content = document.getElementById('content');
-
+const infoDiv = document.createElement('div');
 const header = () => {
   const headerDiv = document.createElement('header');
   const title = document.createElement('h1');
@@ -9,11 +9,10 @@ const header = () => {
   content.appendChild(headerDiv);
 }
 
-const info = () => {
-  const infoDiv = document.createElement('div');
-  
+export const info = (city) => {
   infoDiv.className = 'info';
-
+  infoDiv.innerText = city;
+  console.log(city);
   return infoDiv;
 }
 
@@ -33,7 +32,7 @@ const section = () => {
   form.appendChild(searchInput);
   form.appendChild(submitBtn);
   sectionDiv.appendChild(form);
-  sectionDiv.appendChild(info());
+  sectionDiv.appendChild(infoDiv);
   content.appendChild(sectionDiv);
 }
 
