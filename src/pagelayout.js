@@ -9,10 +9,10 @@ const header = () => {
   content.appendChild(headerDiv);
 }
 
-export const info = (city) => {
+export const info = (weatherObject) => {
   infoDiv.className = 'info';
-  infoDiv.innerText = city;
-  console.log(city);
+  infoDiv.innerText = weatherObject.city;
+  console.log(weatherObject);
   return infoDiv;
 }
 

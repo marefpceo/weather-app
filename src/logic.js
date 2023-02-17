@@ -18,7 +18,7 @@ async function getGeoData(location) {
 }
 
 
-// Gets current weather and 5 day forecast for selected location
+// Gets current weather forecast for selected location
 export async function getWeatherData(searchInput) {
   try {
     const cityData = await getGeoData(searchInput);
@@ -58,8 +58,9 @@ export async function getWeatherData(searchInput) {
     
     outputData.city = searchInput;
     outputData.state = state;
+    outputData.currentTemps = currentWeather.main;
 
-    info(outputData.city);
+    info(outputData);
 
     console.log(cityData, currentWeather);
     console.log(outputData);
