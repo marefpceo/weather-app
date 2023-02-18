@@ -7,4 +7,3 @@ getWeatherData('Lemoore');
 loadPage();
 
 console.log();
-

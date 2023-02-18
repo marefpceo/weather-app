@@ -17,7 +17,6 @@ async function getGeoData(location) {
   }
 }
 
-
 // Gets current weather forecast for selected location
 export async function getWeatherData(searchInput) {
   try {
@@ -43,23 +42,16 @@ export async function getWeatherData(searchInput) {
     const responses = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiKey}`,
       {mode: 'cors'});
     const currentWeather = await responses.json();
-
-    // outputData = {
-    //   city: searchInput,
-    //   state: state,
-    //   currentTemps: currentWeather.main,
-    //   currentConditions: {description: currentWeather.weather[0].description,
-    //     icon: currentWeather.weather[0].icon},
-    //   wind: currentWeather.wind,
-    //   sunrise: currentWeather.sys.sunrise,
-    //   sunset: currentWeather.sys.sunset
-    // };
-
     
     outputData.city = searchInput;
     outputData.state = state;
     outputData.currentTemps = currentWeather.main;
-
+    outputData.description = currentWeather.weather[0].description;
+    outputData.icon = currentWeather.weather[0].icon;
+    outputData.wind = currentWeather.wind;
+    outputData.sunrise = currentWeather.sys.sunrise;
+    outputData.sunset = currentWeather.sys.sunset;
+  
     info(outputData);
 
     console.log(cityData, currentWeather);

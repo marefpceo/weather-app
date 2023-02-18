@@ -82,13 +82,35 @@ button {
   display: grid;
   grid-template-rows: 1fr 1fr;
   padding: 0 50px;
-
   background-color: var(--background-light);
-  border: 2px solid black;
+  border: 2px solid var(--header-bg-dark);
 }
 
 .info {
+  font-size: 1.5rem;
+  line-height: 30px;
   background-color: #ffffff;
-  width: 50%;
   height: auto;
+  border-radius: 8px;
+  border: 1px solid var(--header-bg-dark);
+  margin-top: 50px;
+  padding: 15px;
+}
+
+#info-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 75px;
+}
+
+#info-body {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2rem;
+  margin-top: 25px;
+}
+
+#weather-icon {
+  width: 125px;
+  height: 125px;
 }
