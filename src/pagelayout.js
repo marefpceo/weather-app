@@ -1,3 +1,6 @@
+import { timeConversion } from './helpers';
+import { tempToFahrenheit } from './helpers';
+
 const cache = {};
 
 function importAll(r) {
@@ -9,6 +12,7 @@ importAll(require.context('./assets', false, /\.(png|jpe?g|svg)$/));
 
 const content = document.getElementById('content');
 const infoDiv = document.createElement('div');
+
 const header = () => {
   const headerDiv = document.createElement('header');
   const title = document.createElement('h1');
@@ -23,8 +27,13 @@ export const info = (weatherObject) => {
   const infoBody = document.createElement('div');
   const cityDiv = document.createElement('div');
   const icon = document.createElement('img');
+  const sunriseIcon = document.createElement('img');
+  const sunsetIcon = document.createElement('img');
+  const windIcon = document.createElement('img');
   const tempDiv = document.createElement('div');
   const sunDiv = document.createElement('div');
+  const sunriseDiv = document.createElement('div');
+  const sunsetDiv = document.createElement('div');
   const windDiv = document.createElement('div');
 
   infoDiv.className = 'info';
@@ -32,21 +41,38 @@ export const info = (weatherObject) => {
   infoBody.id = 'info-body';
   cityDiv.id = 'city-name';
   icon.id = 'weather-icon';
+  sunriseIcon.id = 'sunrise-icon';
+  sunsetIcon.id = 'sunset-icon';
+  sunriseDiv.className = 'sun';
+  sunsetDiv.className = 'sun';
+  windIcon.id = 'wind-icon';
   tempDiv.id = 'current-temp';
   sunDiv.id = 'sun-div';
   windDiv.id = 'wind-div';
 
   cityDiv.innerHTML = weatherObject.city + ', <br/>' + weatherObject.state;
   icon.src = cache[`${weatherObject.icon}.svg`];
-  tempDiv.innerHTML = `<div>${weatherObject.currentTemps.temp}</div>`;
+  tempDiv.innerHTML = `<div>${tempToFahrenheit(weatherObject.currentTemps.temp)}</div>`;
   tempDiv.innerHTML += `<div>${weatherObject.description}</div>`;
-  sunDiv.innerHTML = `<div>Sunrise: ${weatherObject.sunrise}</div>`;
-  sunDiv.innerHTML += `<div>Sunset: ${weatherObject.sunset}</div>`;
-  windDiv.innerHTML = `<div>Wind: ${weatherObject.wind.speed} mph</div>`;
+
+  sunriseIcon.src = cache[`sunrise.svg`];
+  sunriseDiv.appendChild(sunriseIcon);
+  sunriseDiv.innerHTML += `<div>${timeConversion(weatherObject.sunrise)}</div>`;
+
+  sunsetIcon.src = cache[`sunset.svg`];
+  sunsetDiv.appendChild(sunsetIcon);
+  sunsetDiv.innerHTML += `<div>${timeConversion(weatherObject.sunset)}</div>`;
+
+  windIcon.src = cache[`wind.svg`];
+  windDiv.appendChild(windIcon);
+  windDiv.innerHTML += `<div> ${weatherObject.wind.speed} mph</div>`;
 
   infoHead.appendChild(cityDiv);
   infoHead.appendChild(icon);
   infoHead.appendChild(tempDiv);
+
+  sunDiv.appendChild(sunriseDiv);
+  sunDiv.appendChild(sunsetDiv);
 
   infoBody.appendChild(sunDiv);
   infoBody.appendChild(windDiv);

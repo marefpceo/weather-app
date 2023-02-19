@@ -89,7 +89,7 @@ button {
 .info {
   font-size: 1.5rem;
   line-height: 30px;
-  background-color: #ffffff;
+  background-color: var(--search-bg);
   height: auto;
   border-radius: 8px;
   border: 1px solid var(--header-bg-dark);
@@ -99,7 +99,9 @@ button {
 
 #info-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
   gap: 75px;
 }
 
@@ -107,10 +109,38 @@ button {
   display: flex;
   justify-content: space-between;
   font-size: 1.2rem;
-  margin-top: 25px;
 }
 
 #weather-icon {
   width: 125px;
   height: 125px;
+}
+
+#current-temp :first-child{
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+#wind-div {
+  display: flex;
+  align-items: center;
+}
+
+#wind-icon,
+#sunrise-icon,
+#sunset-icon {
+  width: 70px;
+  height: 70px;
+}
+
+#sun-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sun {
+  display: flex;
+  font-size: 1rem;
+  align-items: center;
 }
