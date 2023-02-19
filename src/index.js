@@ -1,9 +1,7 @@
-import { getWeatherData } from './logic';
+import { getInputData } from './logic';
 import { loadPage } from './pagelayout';
 import './style.css';
 
 
-getWeatherData('Lemoore');
 loadPage();
-
-console.log();
+getInputData();

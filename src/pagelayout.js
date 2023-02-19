@@ -12,6 +12,7 @@ importAll(require.context('./assets', false, /\.(png|jpe?g|svg)$/));
 
 const content = document.getElementById('content');
 const infoDiv = document.createElement('div');
+const sectionDiv = document.createElement('section');
 
 const header = () => {
   const headerDiv = document.createElement('header');
@@ -65,7 +66,7 @@ export const info = (weatherObject) => {
 
   windIcon.src = cache[`wind.svg`];
   windDiv.appendChild(windIcon);
-  windDiv.innerHTML += `<div> ${weatherObject.wind.speed} mph</div>`;
+  windDiv.innerHTML += `<div> ${Math.round(weatherObject.wind.speed)} mph</div>`;
 
   infoHead.appendChild(cityDiv);
   infoHead.appendChild(icon);
@@ -82,11 +83,10 @@ export const info = (weatherObject) => {
   
   console.log(weatherObject);
   console.log(cache);
-  return infoDiv;
 }
 
 const section = () => {
-  const sectionDiv = document.createElement('section');
+  
   const form = document.createElement('form');
   const searchInput = document.createElement('input');
   const submitBtn = document.createElement('button');
@@ -96,7 +96,8 @@ const section = () => {
   searchInput.setAttribute('placeholder', 'Enter city');
   searchInput.setAttribute('id', 'search');
   
-  submitBtn.id = 'search-btn';
+  submitBtn.setAttribute('type', 'button');
+  submitBtn.setAttribute('id', 'search-btn');
 
   form.appendChild(searchInput);
   form.appendChild(submitBtn);
@@ -107,5 +108,24 @@ const section = () => {
 
 export const loadPage = () => {
   header();
-  section();
+  section();  
+}
+
+export const clearInfo = () => {
+  infoDiv.innerHTML = '';
+}
+
+export const stateListModal = (arrayList) => {
+  const stateList = document.createElement('div');
+
+  stateList.id = 'state-list';
+  infoDiv.style.display = 'none';
+
+  for (let i = 0; i < arrayList.length; i += 1) {
+    const state = document.createElement('div');
+    state.id = arrayList[i];
+    state.innerText = arrayList[i];
+    stateList.appendChild(state);
+  }
+  sectionDiv.appendChild(stateList);
 }

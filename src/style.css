@@ -87,6 +87,7 @@ button {
 }
 
 .info {
+  display: block;
   font-size: 1.5rem;
   line-height: 30px;
   background-color: var(--search-bg);
@@ -124,6 +125,10 @@ button {
 #wind-div {
   display: flex;
   align-items: center;
+}
+
+#wind-div :last-child {
+  font-size: 1.5rem;
 }
 
 #wind-icon,

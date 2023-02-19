@@ -1,8 +1,7 @@
-import { info } from './pagelayout';
+import { clearInfo, info, stateListModal } from './pagelayout';
 
 const apiKey = '8f640f8fcc7f3fdc5f949c5b28f1bf02';
-
-export const outputData = {};
+const outputData = {};
 
 // Uses OpenWeather geocoding API to return lat/ long coordinates for searched location
 async function getGeoData(location) {
@@ -17,16 +16,30 @@ async function getGeoData(location) {
   }
 }
 
+// Gets user city input to search
+export const getInputData = () => {
+  const searchBtn = document.getElementById('search-btn');
+  
+  searchBtn.addEventListener('click', () => {
+    let inputValue = document.getElementById('search');
+    getWeatherData(inputValue.value);
+    inputValue.value = '';
+  });
+}
+
 // Gets current weather forecast for selected location
 export async function getWeatherData(searchInput) {
   try {
     const cityData = await getGeoData(searchInput);
-    let lat, long, cityList, state;
+    let lat, long, state;
+    let stateList = [];
     if (cityData.length > 1) {
       for (let i = 0; i < cityData.length; i += 1) {
-        cityList = cityData[i].state;
-        console.log(cityList);
+        stateList.push(cityData[i].state);
       }
+      stateListModal(stateList);
+
+      console.log(stateList);
       let selection = 'Virginia'; // For testin purposes only. User will select state from list
       let index = cityData.findIndex(city => city.state === selection);
       lat = cityData[index].lat;
@@ -52,12 +65,14 @@ export async function getWeatherData(searchInput) {
     outputData.sunrise = currentWeather.sys.sunrise;
     outputData.sunset = currentWeather.sys.sunset;
   
+    clearInfo();
     info(outputData);
 
     console.log(cityData, currentWeather);
     console.log(outputData);
     
   } catch (error) {
-    Error(error);
+    console.log(Error(error));
+    alert('No data found for the city');
   }
 }
