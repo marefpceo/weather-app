@@ -117,6 +117,7 @@ export const clearInfo = () => {
 
 export const stateListModal = (arrayList) => {
   const stateList = document.createElement('div');
+  // let selection;
 
   stateList.id = 'state-list';
   infoDiv.style.display = 'none';
@@ -124,8 +125,14 @@ export const stateListModal = (arrayList) => {
   for (let i = 0; i < arrayList.length; i += 1) {
     const state = document.createElement('div');
     state.id = arrayList[i];
-    state.innerText = arrayList[i];
+    state.innerHTML = arrayList[i];
     stateList.appendChild(state);
   }
   sectionDiv.appendChild(stateList);
+
+  // stateList.addEventListener('click', (e) => {
+  //   selection = e.target.id;
+  //   console.log(selection);
+  // });
+  // return selection;
 }
