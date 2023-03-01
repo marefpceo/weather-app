@@ -8,7 +8,7 @@ const outputData = {};
 async function getGeoData(location) {
   const searchLocation = location;
   try {
-    const locationData = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${searchLocation},us&appid=${apiKey}`,
+    const locationData = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${searchLocation},us&appid=${apiKey}`,
       {mode: 'cors'});
     const locationGeoData = await locationData.json();
     return locationGeoData;
