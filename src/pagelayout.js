@@ -1,5 +1,4 @@
-import { timeConversion } from './helpers';
-import { tempToFahrenheit } from './helpers';
+import { tempSelect, tempToFahrenheit, titleCaseConvert } from './helpers';
 
 const cache = {};
 
@@ -28,72 +27,71 @@ export const info = (weatherObject) => {
   const infoBody = document.createElement('div');
   const cityDiv = document.createElement('div');
   const icon = document.createElement('img');
-  const sunriseIcon = document.createElement('img');
-  const sunsetIcon = document.createElement('img');
   const windIcon = document.createElement('img');
   const tempDiv = document.createElement('div');
-  const sunDiv = document.createElement('div');
-  const sunriseDiv = document.createElement('div');
-  const sunsetDiv = document.createElement('div');
   const windDiv = document.createElement('div');
+  const toggleDiv = document.createElement('div');
+  const toggleLabel = document.createElement('label');
+  const toggle = document.createElement('input');
+  const slider = document.createElement('span');
+  const fLabel = document.createElement('div');
+  const cLabel = document.createElement('div');
 
   infoDiv.className = 'info';
   infoHead.id = 'info-header';
   infoBody.id = 'info-body';
   cityDiv.id = 'city-name';
   icon.id = 'weather-icon';
-  sunriseIcon.id = 'sunrise-icon';
-  sunsetIcon.id = 'sunset-icon';
-  sunriseDiv.className = 'sun';
-  sunsetDiv.className = 'sun';
   windIcon.id = 'wind-icon';
   tempDiv.id = 'current-temp';
-  sunDiv.id = 'sun-div';
   windDiv.id = 'wind-div';
+  toggleDiv.id = 'toggle-div';
+  toggleLabel.className = 'switch';
+  toggle.type = 'checkbox';
+  toggle.id = 'toggle';
+  slider.className = 'slider';
+
 
   cityDiv.innerHTML = weatherObject.city + ', <br/>' + weatherObject.state;
   icon.src = cache[`${weatherObject.icon}.svg`];
-  tempDiv.innerHTML = `<div>${tempToFahrenheit(weatherObject.currentTemps.temp)}</div>`;
-  tempDiv.innerHTML += `<div>${weatherObject.description}</div>`;
-
-  sunriseIcon.src = cache[`sunrise.svg`];
-  sunriseDiv.appendChild(sunriseIcon);
-  sunriseDiv.innerHTML += `<div>${timeConversion(weatherObject.sunrise)}</div>`;
-
-  sunsetIcon.src = cache[`sunset.svg`];
-  sunsetDiv.appendChild(sunsetIcon);
-  sunsetDiv.innerHTML += `<div>${timeConversion(weatherObject.sunset)}</div>`;
+  tempDiv.innerHTML = `<div>${tempToFahrenheit(weatherObject.currentTemps.temp)} \u2109</div>`;
+  tempDiv.innerHTML += `<div>${titleCaseConvert(weatherObject.description)}</div>`;
 
   windIcon.src = cache[`wind.svg`];
   windDiv.appendChild(windIcon);
   windDiv.innerHTML += `<div> ${Math.round(weatherObject.wind.speed)} mph</div>`;
+  
+  fLabel.innerHTML = '\u2109';
+  cLabel.innerHTML = '\u2103';
+
+  toggleLabel.appendChild(toggle);
+  toggleLabel.appendChild(slider);
+
+  toggleDiv.appendChild(fLabel);
+  toggleDiv.appendChild(toggleLabel);
+  toggleDiv.appendChild(cLabel);
 
   infoHead.appendChild(cityDiv);
   infoHead.appendChild(icon);
   infoHead.appendChild(tempDiv);
 
-  sunDiv.appendChild(sunriseDiv);
-  sunDiv.appendChild(sunsetDiv);
-
-  infoBody.appendChild(sunDiv);
   infoBody.appendChild(windDiv);
+  infoBody.appendChild(toggleDiv);
 
   infoDiv.appendChild(infoHead);
   infoDiv.appendChild(infoBody);
-  
-  console.log(weatherObject);
-  console.log(cache);
+
+  tempSelect(weatherObject.currentTemps.temp);
 }
 
-const section = () => {
-  
+const section = () => { 
   const form = document.createElement('form');
   const searchInput = document.createElement('input');
   const submitBtn = document.createElement('button');
   
   searchInput.setAttribute('type', 'text');
   searchInput.setAttribute('name', 'search');
-  searchInput.setAttribute('placeholder', 'Enter city');
+  searchInput.setAttribute('placeholder', 'ex. Richmond, CA');
   searchInput.setAttribute('id', 'search');
   
   submitBtn.setAttribute('type', 'button');
@@ -111,28 +109,7 @@ export const loadPage = () => {
   section();  
 }
 
+//Clears all info div
 export const clearInfo = () => {
   infoDiv.innerHTML = '';
-}
-
-export const stateListModal = (arrayList) => {
-  const stateList = document.createElement('div');
-  // let selection;
-
-  stateList.id = 'state-list';
-  infoDiv.style.display = 'none';
-
-  for (let i = 0; i < arrayList.length; i += 1) {
-    const state = document.createElement('div');
-    state.id = arrayList[i];
-    state.innerHTML = arrayList[i];
-    stateList.appendChild(state);
-  }
-  sectionDiv.appendChild(stateList);
-
-  // stateList.addEventListener('click', (e) => {
-  //   selection = e.target.id;
-  //   console.log(selection);
-  // });
-  // return selection;
 }

@@ -125,6 +125,7 @@ button {
 #info-body {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   font-size: 1.2rem;
 }
 
@@ -141,27 +142,71 @@ button {
 #wind-div {
   display: flex;
   align-items: center;
+  padding: 0px 20px;
 }
 
 #wind-div :last-child {
   font-size: 1.5rem;
 }
 
-#wind-icon,
-#sunrise-icon,
-#sunset-icon {
+#wind-icon {
   width: 70px;
   height: 70px;
 }
 
-#sun-div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
 }
 
-.sun {
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--header-bg-dark);
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider::before {
+  position: absolute;
+  content: '';
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: var(--background-light);
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: var(--background-light);
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px var(--background-light);
+}
+
+input:checked + .slider::before {
+  background-color: var(--background-dark);
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+#toggle-div {
   display: flex;
-  font-size: 1rem;
-  align-items: center;
+  gap: 10px;
 }
